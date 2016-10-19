@@ -1,0 +1,269 @@
+/* Font Faces */
+$title_font: "Carrois Gothic SC";
+$temperature_font: "Julius Sans One";
+
+/* Media Query Screen Sizes */
+$size_nano: "screen and (max-width: 342px)";
+$size_micro: "screen and (max-width: 408px)";
+$size_tiny: "screen and (max-width: 445px)";
+$size_phone: "screen and (max-width: 780px)";
+$size_collapse: "screen and (max-width: 1100px)";
+$size_shrink: "screen and (max-width: 1200px)";
+$size_remove_margins: "screen and (max-width: 1300px)";
+
+/* Scalable Font Sizing */
+$tiny: 1.2rem;
+$xs: 2.0rem;
+$small: 2.7rem;
+$medium: 3.7rem;
+$large: 4.3rem;
+$xl: 5.5rem;
+$title: 7.0rem;
+
+html {
+  font-size: 45%;
+  @media #{$size_shrink} {
+    font-size: 40%;
+  }
+  @media #{$size_micro} {
+    font-size: 35%;
+  }
+  @media #{$size_nano} {
+    font-size: 30%;
+  }
+}
+
+body {
+  margin: 60px 7% 50px 7%;
+  @media #{$size_remove_margins} {
+    margin: 60px 0 50px 0;
+  }
+}
+
+.navbar {
+  margin-left: 7%;
+  margin-right: 7%;
+  @media #{$size_remove_margins} {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  padding-bottom: 2px;
+}
+
+.navbar-default {
+  .navbar-brand {
+  }
+}
+
+.current-location {
+  font-weight: bold;
+}
+
+.content {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: stretch;
+  @media #{$size_phone} {
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+.content7 {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  @media #{$size_micro} {
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+.main-summary {
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+}
+
+.day {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 2% 1.5% 2% 1.5%;
+  flex: 1;
+  @media #{$size_phone} {
+    height: auto;
+  }
+}
+
+.day7 {
+  min-width: 250px;
+  text-align: center;
+  margin: 0.5% 0.5% 0.5% 0.5%;
+  flex: 1;
+  @media #{$size_phone} {
+    height: auto;
+  }
+}
+
+.precip-prob {
+  color: #fff;
+  font-size: $small;
+}
+
+.wind-speed {
+  color: #fff;
+  font-size: $small;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.day-title {
+  margin: auto;
+  color: orange;
+  font-size: $title;
+}
+
+.day-title7 {
+  margin: auto;
+  color: orange;
+  font-size: $large;
+}
+
+.weather-icon {
+  font-size: $xs;
+  margin: auto;
+}
+.mini-weather-icon {
+  font-size: $tiny;
+  margin: auto;
+}
+
+.td-temp, .conditions {
+  font-family: $temperature_font;
+  margin: auto;
+}
+
+.temperature {
+  cursor: pointer;
+}
+
+.conditions {
+  color: #fff;
+  font-size: $large;
+}
+
+.conditions7 {
+  color: #fff;
+  font-size: $small;
+}
+
+.td-temp {
+  margin-top: 20px;
+  color: orange;
+  font-size: $large;
+}
+
+.high-low {
+  margin-bottom: 35px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .high {
+    flex-grow: 1;
+    color: #ff8080;
+    font-size: $medium;
+  }
+  .high7 {
+    flex-grow: 1;
+    color: #ff8080;
+    font-size: $small;
+  }
+  .low {
+    flex-grow: 1;
+    color: #b3ffff;
+    font-size: $medium;
+  }
+  .low7 {
+    flex-grow: 1;
+    color: #b3ffff;
+    font-size: $small;
+  }
+}
+
+.sunset-time {
+  color: orange;
+  font-size: $medium;
+  margin-bottom: 35px;
+}
+
+.general-forecast {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.sub-temperature {
+  color: orange;
+  font-size: $medium;
+}
+
+.part-of-day {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.part-of-day-title {
+  font-family: $title_font;
+  font-size: $medium;
+  margin-bottom: 0;
+  &.morning-title {
+    color: lightblue;
+  }
+  &.afternoon-title {
+    color: yellow;
+  }
+  &.evening-title {
+    color: orange;
+  }
+}
+
+.see-hourly-btn {
+  margin: 30px 0 30px 0;
+}
+
+.fa-tint {
+      color: lightblue;
+    }
+
+.hourly-table {
+  width: 100%;
+  td {
+    text-align: center;
+    font-size: $small;
+    border: 1px solid orange;
+    color: #fff;
+  }
+}
+
+.shaded {
+  background-color: orange;
+}
+
+.footer {
+  p {
+    text-align: center;
+  }
+}

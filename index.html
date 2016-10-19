@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Local Weather</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Carrois+Gothic+SC|Julius+Sans+One|Josefin+Slab|Ubuntu" rel="stylesheet">
+
+
+    
+    
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+<link rel='stylesheet prefetch' href='https://csw.nyc/projects/weather_app/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://codepen.io/cswilson14/pen/GjEVAw.css'>
+
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+    
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">QuickWeather</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a id="nav_2day" href="#">2 Day Forecast <span class="sr-only">(current)</span></a></li>
+        <li><a id="nav_7day" href="#">7 Day Forecast</a></li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Current Location: <span id="current_location" class="current-location"><i class="fa fa-refresh fa-spin fa-fw"></i> Detecting...</span></h3>
+  </div>
+  <div class="panel-body">
+    <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input id="address" type="text" class="form-control" placeholder="Enter Location">
+        </div>
+        <button id="get_weather_button" class="btn btn-success" type="button">Get Weather</button>
+        <button id="detect_location_button" class="btn btn-info" title="Detect Location" type="button"><i class="fa fa-location-arrow" aria-hidden="true"></i></button>
+      </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div id="content_two_day" class="content">
+  <div class="well day">
+    <h2 class="day-title">Today (<span id="td_day"></span>)</h2>
+    <div id="td_weather_icon" class="weather-icon"></div>
+    <span id="td_conditions" class="conditions"></span>
+    <span class="temperature td-temp">
+      <span id="td_temperature"></span>° <span class="unit">F</span>
+    </span>
+    <div class="high-low">
+      <span class="temperature low">Low: 
+        <span id="td_temperature_low"></span>° <span class="unit">F</span>
+        (<span id="td_time_low"></span>)
+      </span>
+      <span class="temperature high">High: 
+        <span id="td_temperature_high"></span>° <span class="unit">F</span>
+        (<span id="td_time_high"></span>)
+      </span>
+    </div>
+    <div id="td_sunset_time" class="sunset-time"></div>
+    <div class="general-forecast">
+      <div class="part-of-day">
+        <span class="part-of-day-title morning-title">Morning</span>
+        <div id="td_icon_morning" class="mini-weather-icon"></div>
+        <span class="temperature sub-temperature">
+          <span id="td_temperature_morning"></span>° <span class="unit">F</span>
+        </span>
+      </div>
+      <div class="part-of-day">
+        <span class="part-of-day-title afternoon-title">Afternoon</span>
+        <div id="td_icon_afternoon" class="mini-weather-icon"></div>
+        <span class="temperature sub-temperature">
+          <span id="td_temperature_afternoon"></span>° <span class="unit">F</span>
+        </span>
+      </div>
+      <div class="part-of-day">
+        <span class="part-of-day-title evening-title">Evening</span>
+        <div id="td_icon_evening" class="mini-weather-icon"></div>
+        <span class="temperature sub-temperature">
+          <span id="td_temperature_evening"></span>° <span class="unit">F</span>
+        </span>
+      </div>
+    </div>
+
+   <button id="td_see_hourly_btn" class="btn btn-primary see-hourly-btn" type="button" data-toggle="collapse" data-target="#td_hourly_table_container" aria-expanded="false" aria-controls="td_hourly_table_container">
+  Show Hourly Forecast
+</button>
+    
+    <div id="td_hourly_table_container" class="collapse">
+      <table id="td_hourly_table" class="hourly-table"></table>
+      <i class="fa fa-tint" aria-hidden="true"></i>: Chance of Rain 
+      <i class="fa fa-square" aria-hidden="true" style="color: orange"></i>: Current
+    </div>
+  </div>
+  
+  
+  <div class="well day">
+    <h2 class="day-title">Tomorrow (<span id="tm_day"></span>)</h2>
+    <div id="tm_weather_icon" class="weather-icon"></div>
+    <span id="tm_conditions" class="conditions"></span>
+    <div class="high-low">
+      <span class="temperature low">Low: 
+        <span id="tm_temperature_low"></span>° <span class="unit">F</span>
+        (<span id="tm_time_low"></span>)
+      </span>
+      <span class="temperature high">High: 
+        <span id="tm_temperature_high"></span>° <span class="unit">F</span>
+        (<span id="tm_time_high"></span>)
+      </span>
+    </div>
+    <div id="tm_sunset_time" class="sunset-time"></div>
+    <div class="general-forecast">
+      <div class="part-of-day">
+        <span class="part-of-day-title morning-title">Morning</span>
+        <div id="tm_icon_morning" class="mini-weather-icon"></div>
+        <span class="temperature sub-temperature">
+          <span id="tm_temperature_morning"></span>° <span class="unit">F</span>
+        </span>
+      </div>
+      <div class="part-of-day">
+        <span class="part-of-day-title afternoon-title">Afternoon</span>
+        <div id="tm_icon_afternoon" class="mini-weather-icon"></div>
+        <span class="temperature sub-temperature">
+          <span id="tm_temperature_afternoon"></span>° <span class="unit">F</span>
+        </span>
+      </div>
+      <div class="part-of-day">
+        <span class="part-of-day-title evening-title">Evening</span>
+        <div id="tm_icon_evening" class="mini-weather-icon"></div>
+        <span class="temperature sub-temperature">
+          <span id="tm_temperature_evening"></span>° <span class="unit">F</span>
+        </span>
+      </div>
+    </div>
+
+    <button id="tm_see_hourly_btn" class="btn btn-primary see-hourly-btn" type="button" data-toggle="collapse" data-target="#tm_hourly_table_container" aria-expanded="false" aria-controls="tm_hourly_table_container">
+  Show Hourly Forecast
+</button>
+    
+    <div id="tm_hourly_table_container" class="collapse">
+      <table id="tm_hourly_table" class="hourly-table"></table>
+      <i class="fa fa-tint" aria-hidden="true"></i>: Chance of Rain 
+    </div>
+
+  </div>
+</div>
+
+<div id="content_seven_day" class="content7">
+  <div id="summary7" class="well main-summary">
+    Light rain on Thursday through Monday, with temperatures falling to 62°F on Sunday.
+  </div>
+  
+  <div class="well day7">
+    <h2 class="day-title7"><span id="day_title_1"></span> (Today)</h2>
+    <div id="weather_icon_1" class="mini-weather-icon"></div>
+    <div id="conditions_1" class="conditions7"></div>
+    <div class="high-low">
+      <span class="temperature low7">Low: 
+        <span id="temperature_low_1"></span>° <span class="unit">F</span>
+        (<span id="time_low_1"></span>)
+      </span>
+      <span class="temperature high7">High: 
+        <span id="temperature_high_1"></span>° <span class="unit">F</span>
+        (<span id="time_high_1"></span>)
+      </span>
+    </div>
+    <div class="sunset-time">Sunset: <span id="sunset_time_1"></span>
+    </div>
+    <div class="wind-speed">Wind Speed: <span id="wind_speed_1"></span> MPH</div>
+  
+    <div class="precip-prob"><i class="fa fa-tint"></i> Chance of Rain: <span id="chance_rain_1"></span>%
+    </div>
+  </div>
+  
+  <div class="well day7">
+    <h2 id="day_title_2" class="day-title7"></h2>
+    <div id="weather_icon_2" class="mini-weather-icon"></div>
+    <div id="conditions_2" class="conditions7"></div>
+    <div class="high-low">
+      <span class="temperature low7">Low: 
+        <span id="temperature_low_2"></span>° <span class="unit">F</span>
+        (<span id="time_low_2"></span>)
+      </span>
+      <span class="temperature high7">High: 
+        <span id="temperature_high_2"></span>° <span class="unit">F</span>
+        (<span id="time_high_2"></span>)
+      </span>
+    </div>
+    <div class="sunset-time">Sunset: <span id="sunset_time_2"></span>
+    </div>
+    <div class="wind-speed">Wind Speed: <span id="wind_speed_2"></span> MPH</div>
+  
+    <div class="precip-prob"><i class="fa fa-tint"></i> Chance of Rain: <span id="chance_rain_2"></span>%
+    </div>
+  </div>
+  
+  <div class="well day7">
+    <h2 id="day_title_3" class="day-title7"></h2>
+    <div id="weather_icon_3" class="mini-weather-icon"></div>
+    <div id="conditions_3" class="conditions7"></div>
+    <div class="high-low">
+      <span class="temperature low7">Low: 
+        <span id="temperature_low_3"></span>° <span class="unit">F</span>
+        (<span id="time_low_3"></span>)
+      </span>
+      <span class="temperature high7">High: 
+        <span id="temperature_high_3"></span>° <span class="unit">F</span>
+        (<span id="time_high_3"></span>)
+      </span>
+    </div>
+    <div class="sunset-time">Sunset: <span id="sunset_time_3"></span>
+    </div>
+    <div class="wind-speed">Wind Speed: <span id="wind_speed_3"></span> MPH</div>
+  
+    <div class="precip-prob"><i class="fa fa-tint"></i> Chance of Rain: <span id="chance_rain_3"></span>%
+    </div>
+  </div>
+  
+  <div class="well day7">
+    <h2 id="day_title_4" class="day-title7"></h2>
+    <div id="weather_icon_4" class="mini-weather-icon"></div>
+    <div id="conditions_4" class="conditions7"></div>
+    <div class="high-low">
+      <span class="temperature low7">Low: 
+        <span id="temperature_low_4"></span>° <span class="unit">F</span>
+        (<span id="time_low_4"></span>)
+      </span>
+      <span class="temperature high7">High: 
+        <span id="temperature_high_4"></span>° <span class="unit">F</span>
+        (<span id="time_high_4"></span>)
+      </span>
+    </div>
+    <div class="sunset-time">Sunset: <span id="sunset_time_4"></span>
+    </div>
+    <div class="wind-speed">Wind Speed: <span id="wind_speed_4"></span> MPH</div>
+  
+    <div class="precip-prob"><i class="fa fa-tint"></i> Chance of Rain: <span id="chance_rain_4"></span>%
+    </div>
+  </div>
+  
+  <div class="well day7">
+    <h2 id="day_title_5" class="day-title7"></h2>
+    <div id="weather_icon_5" class="mini-weather-icon"></div>
+    <div id="conditions_5" class="conditions7"></div>
+    <div class="high-low">
+      <span class="temperature low7">Low: 
+        <span id="temperature_low_5"></span>° <span class="unit">F</span>
+        (<span id="time_low_5"></span>)
+      </span>
+      <span class="temperature high7">High: 
+        <span id="temperature_high_5"></span>° <span class="unit">F</span>
+        (<span id="time_high_5"></span>)
+      </span>
+    </div>
+    <div class="sunset-time">Sunset: <span id="sunset_time_5"></span>
+    </div>
+    <div class="wind-speed">Wind Speed: <span id="wind_speed_5"></span> MPH</div>
+  
+    <div class="precip-prob"><i class="fa fa-tint"></i> Chance of Rain: <span id="chance_rain_5"></span>%
+    </div>
+  </div>
+  
+  <div class="well day7">
+    <h2 id="day_title_6" class="day-title7"></h2>
+    <div id="weather_icon_6" class="mini-weather-icon"></div>
+    <div id="conditions_6" class="conditions7"></div>
+    <div class="high-low">
+      <span class="temperature low7">Low: 
+        <span id="temperature_low_6"></span>° <span class="unit">F</span>
+        (<span id="time_low_6"></span>)
+      </span>
+      <span class="temperature high7">High: 
+        <span id="temperature_high_6"></span>° <span class="unit">F</span>
+        (<span id="time_high_6"></span>)
+      </span>
+    </div>
+    <div class="sunset-time">Sunset: <span id="sunset_time_6"></span>
+    </div>
+    <div class="wind-speed">Wind Speed: <span id="wind_speed_6"></span> MPH</div>
+  
+    <div class="precip-prob"><i class="fa fa-tint"></i> Chance of Rain: <span id="chance_rain_6"></span>%
+    </div>
+  </div>
+  
+  <div class="well day7">
+    <h2 id="day_title_7" class="day-title7"></h2>
+    <div id="weather_icon_7" class="mini-weather-icon"></div>
+    <div id="conditions_7" class="conditions7"></div>
+    <div class="high-low">
+      <span class="temperature low7">Low: 
+        <span id="temperature_low_7"></span>° <span class="unit">F</span>
+        (<span id="time_low_7"></span>)
+      </span>
+      <span class="temperature high7">High: 
+        <span id="temperature_high_7"></span>° <span class="unit">F</span>
+        (<span id="time_high_7"></span>)
+      </span>
+    </div>
+    <div class="sunset-time">Sunset: <span id="sunset_time_7"></span>
+    </div>
+    <div class="wind-speed">Wind Speed: <span id="wind_speed_7"></span> MPH</div>
+  
+    <div class="precip-prob"><i class="fa fa-tint"></i> Chance of Rain: <span id="chance_rain_7"></span>%
+    </div>
+  </div>
+</div>
+
+  
+  
+  
+  
+
+<div class="footer">
+  <p>Powered by <a href="https://darksky.net/poweredby/">Dark Sky</a></p>
+</div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+  </body>
+</html>
