@@ -12,7 +12,7 @@ QuickWeather is smart!  It uses HTML5 Geolocation to detect an extremely precise
 
 ## API Reference
 
-Dark Sky Weather API - https://darksky.net/dev/docs
+Dark Sky Weather API - https://darksky.net/dev/docs  
 Google Maps Geocoding API - https://developers.google.com/maps/documentation/geocoding/intro
 
 ## Live Version
