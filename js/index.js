@@ -434,20 +434,6 @@ function searchLocation() {
   });
 }
 
-/* A hack to reload the page in https mode.  This is
- * necessary because HTML5 Geolocation does not work
- * without https, as well as the fact that we use https
- * resources for our APIs.
- *
- * Mode: Two-day and Seven-day
- */
-function redirectToHttps() {
-  var loc = window.location.href+'';
-  if (loc.indexOf('http://')===0){
-      window.location.href = loc.replace('http://','https://');
-  }
-}
-
 /* Toggles all on-screen temperature values between
  * celsius and fahrenheit and toggles the unix text
  * between C and F
